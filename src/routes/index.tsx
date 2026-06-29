@@ -9,10 +9,12 @@ import {
   useFacets,
   type Filters,
 } from "@/lib/sales-analytics";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { KpiCard } from "@/components/dashboard/KpiCard";
 import { FilterBar } from "@/components/dashboard/FilterBar";
 import { ImportDialog } from "@/components/dashboard/ImportDialog";
 import { SalesTable } from "@/components/dashboard/SalesTable";
+import { ForecastPanel } from "@/components/dashboard/Forecast";
 import {
   CategoryShare,
   RegionBreakdown,
