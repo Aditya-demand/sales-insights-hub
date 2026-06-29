@@ -9,10 +9,12 @@ import {
   useFacets,
   type Filters,
 } from "@/lib/sales-analytics";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { KpiCard } from "@/components/dashboard/KpiCard";
 import { FilterBar } from "@/components/dashboard/FilterBar";
 import { ImportDialog } from "@/components/dashboard/ImportDialog";
 import { SalesTable } from "@/components/dashboard/SalesTable";
+import { ForecastPanel } from "@/components/dashboard/Forecast";
 import {
   CategoryShare,
   RegionBreakdown,
@@ -100,17 +102,26 @@ function Dashboard() {
             </p>
           </div>
         ) : (
-          <>
-            <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-              <RevenueTrend records={filtered} />
-              <CategoryShare records={filtered} />
-            </section>
-            <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-              <TopProducts records={filtered} />
-              <RegionBreakdown records={filtered} />
-            </section>
-            <SalesTable records={filtered} />
-          </>
+          <Tabs defaultValue="overview" className="space-y-5">
+            <TabsList>
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="forecast">Forecast</TabsTrigger>
+            </TabsList>
+            <TabsContent value="overview" className="space-y-5">
+              <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                <RevenueTrend records={filtered} />
+                <CategoryShare records={filtered} />
+              </section>
+              <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                <TopProducts records={filtered} />
+                <RegionBreakdown records={filtered} />
+              </section>
+              <SalesTable records={filtered} />
+            </TabsContent>
+            <TabsContent value="forecast">
+              <ForecastPanel records={filtered} />
+            </TabsContent>
+          </Tabs>
         )}
       </main>
     </div>
